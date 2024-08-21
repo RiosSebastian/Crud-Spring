@@ -1,6 +1,6 @@
 package com.example.CrudConBaseDeDatos.controles;
 
-import com.example.CrudConBaseDeDatos.entity.Usuarios;
+import com.example.CrudConBaseDeDatos.entity.UserEntity;
 import com.example.CrudConBaseDeDatos.servis.UsuariosServis;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +14,17 @@ public class UsuarioControler {
     private UsuariosServis usuariosServis;
 
     @PostMapping("/usuarios")
-    public Usuarios saveUsuarios(@Valid @RequestBody Usuarios usuarios){
+    public UserEntity saveUsuarios(@Valid @RequestBody UserEntity usuarios){
         return usuariosServis.saveUsuarios(usuarios);
     }
     @GetMapping("/usuarios")
-    public List<Usuarios>buscarlistadeusuarios(){
+    public List<UserEntity>buscarlistadeusuarios(){
         return usuariosServis.BuscarListaDeUsuarios();
     }
 
     @PutMapping("/usuarios/{id}")
-    public Usuarios actualizarUsuarios(@RequestBody Usuarios usuarios, @PathVariable("id") long usuarioId){
-        return  usuariosServis.updateUsuarios(usuarios, usuarioId);
+    public UserEntity actualizarUsuarios(@RequestBody UserEntity usuarios, @PathVariable("id") long Id){
+        return  usuariosServis.updateUsuarios(usuarios, Id);
     }
 
     @DeleteMapping("/usuarios/{id}")

@@ -1,7 +1,7 @@
 package com.example.CrudConBaseDeDatos.servis;
 
-import com.example.CrudConBaseDeDatos.entity.Usuarios;
-import com.example.CrudConBaseDeDatos.repositorio.UsuariosRepository;
+import com.example.CrudConBaseDeDatos.entity.UserEntity;
+import com.example.CrudConBaseDeDatos.repositorio.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,49 +11,55 @@ import java.util.Objects;
 @Service
 public class UsuarioServisImpl implements UsuariosServis {
     @Autowired
-    private UsuariosRepository usuariosRepository;
+     private UserRepository userRepository;
 
-    @Override // Save operation
-    public Usuarios saveUsuarios(Usuarios usuarios) {
-        return usuariosRepository.save(usuarios);
+
+
+    @Override
+     // Save operation
+   public UserEntity saveUsuarios(UserEntity usuarios) {
+     return userRepository.save(usuarios);
     }
+
+
 
     @Override// Read operation
-    public List<Usuarios> BuscarListaDeUsuarios() {
-        return (List<Usuarios>)
-                usuariosRepository.findAll();
+    public List<UserEntity> BuscarListaDeUsuarios() {
+        return (List<UserEntity>)
+                userRepository.findAll();
     }
 
-    @Override// Update operation
-    public Usuarios updateUsuarios(Usuarios usuarios, long usuarioId) {
-        Usuarios depDB
-                = usuariosRepository.findById(usuarioId)
+    @Override
+    public UserEntity updateUsuarios(UserEntity userEntity, Long id) {
+        UserEntity depDB
+                = userRepository.findById(id)
                 .get();
 
-        if (Objects.nonNull(usuarios.getNameUsuario())
+        if (Objects.nonNull(userEntity.getUsername())
                 && !"".equalsIgnoreCase(
-                usuarios.getNameUsuario())) {
-            depDB.setNameUsuario(usuarios.getNameUsuario());
+                userEntity.getUsername())) {
+            depDB.setUsername(userEntity.getUsername());
         }
 
         if (Objects.nonNull(
-                usuarios.getDireccion())
+                userEntity.getDireccion())
                 && !"".equalsIgnoreCase(
-                usuarios.getDireccion())) {
-            depDB.setDireccion(usuarios.getDireccion());
+                userEntity.getDireccion())) {
+            depDB.setDireccion(userEntity.getDireccion());
         }
 
-        if (Objects.nonNull(usuarios.getEmail())
+        if (Objects.nonNull(userEntity.getEmail())
                 && !"".equalsIgnoreCase(
-                usuarios.getEmail())) {
-            depDB.setEmail(usuarios.getEmail());
+                userEntity.getEmail())) {
+            depDB.setEmail(userEntity.getEmail());
         }
-        return usuariosRepository.save(depDB);
+        return userRepository.save(depDB);
     }
+
 
     @Override// Delete operation
     public void deleteUsuariosByid(long usuarioId) {
-        usuariosRepository.deleteById(usuarioId);
+        userRepository.deleteById(usuarioId);
     }
 
 }

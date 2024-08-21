@@ -1,16 +1,17 @@
 package com.example.CrudConBaseDeDatos.servis;
 
-import com.example.CrudConBaseDeDatos.entity.Usuarios;
+import com.example.CrudConBaseDeDatos.entity.UserEntity;
 
 import java.util.List;
 
 public interface UsuariosServis {
 
-    Usuarios saveUsuarios(Usuarios usuarios);
 
-    List<Usuarios>BuscarListaDeUsuarios();
+    UserEntity saveUsuarios(UserEntity userEntity);
 
-    Usuarios updateUsuarios(Usuarios usuarios, long usuarioId);
+    List<UserEntity>BuscarListaDeUsuarios();
+
+    UserEntity updateUsuarios(UserEntity userEntity, Long id);
 
     void deleteUsuariosByid(long usuarioId);
 }
