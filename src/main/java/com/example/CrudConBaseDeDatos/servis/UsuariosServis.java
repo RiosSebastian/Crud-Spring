@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface UsuariosServis {
 
+    List<UserEntity> getUsuarios();
 
     UserEntity saveUsuarios(UserEntity userEntity);
 
@@ -14,4 +15,6 @@ public interface UsuariosServis {
     UserEntity updateUsuarios(UserEntity userEntity, Long id);
 
     void deleteUsuariosByid(long usuarioId);
+
+    UserEntity obtenerUsuarioPorCredenciales(UserEntity usuario);
 }

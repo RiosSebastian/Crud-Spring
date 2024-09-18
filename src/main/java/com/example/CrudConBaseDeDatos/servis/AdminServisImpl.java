@@ -4,14 +4,17 @@ import com.example.CrudConBaseDeDatos.entity.Admin;
 import com.example.CrudConBaseDeDatos.repositorio.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
-public class AdminServisImpl implements  AdminServis{
+public class AdminServisImpl implements AdminServis {
+
     @Autowired
     private AdminRepository adminRepository;
+
     @Override
     public Admin saveAdmin(Admin admin) {
         return adminRepository.save(admin);
@@ -24,22 +27,21 @@ public class AdminServisImpl implements  AdminServis{
 
     @Override
     public Admin actualizarAdmin(Admin admin, long adminId) {
-        Admin admDB= adminRepository.findById(adminId).get();
+        Admin admDB = adminRepository.findById(adminId).orElseThrow(() -> new RuntimeException("Admin no encontrado"));
 
-        if (Objects.nonNull(admin.getNameAdmin())&& !"".equalsIgnoreCase(admin.getNameAdmin())){
+        if (StringUtils.hasText(admin.getNameAdmin())) {
             admDB.setNameAdmin(admin.getNameAdmin());
         }
 
-        if (Objects.nonNull(admin.getDireccion())&& !"".equalsIgnoreCase(admin.getDireccion())){
+        if (StringUtils.hasText(admin.getDireccion())) {
             admDB.setDireccion(admin.getDireccion());
         }
 
-        if (Objects.nonNull(admin.getCodigoDeAdmin())&& !"".equalsIgnoreCase(admin.getCodigoDeAdmin())){
+        if (StringUtils.hasText(admin.getCodigoDeAdmin())) {
             admDB.setCodigoDeAdmin(admin.getCodigoDeAdmin());
         }
 
         return adminRepository.save(admDB);
-
     }
 
     @Override

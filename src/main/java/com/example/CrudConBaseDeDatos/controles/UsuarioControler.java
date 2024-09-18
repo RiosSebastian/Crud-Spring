@@ -12,6 +12,7 @@ import java.util.List;
 public class UsuarioControler {
     @Autowired
     private UsuariosServis usuariosServis;
+    private UserEntity userEntity;
 
     @PostMapping("/usuarios")
     public UserEntity saveUsuarios(@Valid @RequestBody UserEntity usuarios){
